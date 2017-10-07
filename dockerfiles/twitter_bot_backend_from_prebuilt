@@ -1,0 +1,9 @@
+FROM fbml/talk2city_prebuilt:0.1
+
+
+COPY /app /app
+WORKDIR /app
+
+ENV HOME /app
+
+ENTRYPOINT ["python", "twitter_bot_backend.py"]

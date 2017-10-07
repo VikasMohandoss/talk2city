@@ -1,0 +1,21 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+RUN apt-get update -y
+RUN apt-get -y upgrade
+RUN apt-get install -y python-pip python-dev build-essential
+
+COPY /app /app
+WORKDIR /app
+
+ENV HOME /app
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Expose port 8000 for uwsgi
+#EXPOSE 8000
+
+ENTRYPOINT ["python", "twitter_bot_backend.py"]
+
+
