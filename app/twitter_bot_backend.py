@@ -35,8 +35,8 @@ def limit_to_140(text):
 def create_reply_text(text, tgt_handle):
     return "Your message will be passed to @%s" % tgt_handle
 
-def create_post_text(text, tgt_handle):
-    return limit_to_140("@%s %s" % (tgt_handle, text))
+def create_post_text(text, sender_handle, tgt_handle):
+    return limit_to_140("@%s - %s says: %s" % (tgt_handle, sender_handle, text))
 
 print("loaded module")
 
@@ -58,7 +58,7 @@ if __name__ == '__main__':
                 tgt_handle = get_target_handle(text)
 
                 reply_text = create_reply_text(text, tgt_handle)
-                status_text = create_post_text(text, tgt_handle)
+                status_text = create_post_text(text, sender_handle, tgt_handle)
 
                 print("Posting status: `%s`" % status_text)
                 twitter_service.statuses.update(status=status_text)
